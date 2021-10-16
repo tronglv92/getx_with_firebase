@@ -84,3 +84,4 @@ Test User as below:
     password: "pistol"
 # getx_with_firebase
 # getx_with_firebase
+# getx_with_firebase
