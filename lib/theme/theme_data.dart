@@ -50,7 +50,7 @@ class ThemeConfig {
       toggleableActiveColor: accentColor,
       appBarTheme: AppBarTheme(
         brightness: brightness,
-        color: cardBackground,
+        color: Colors.blue,
         textTheme: TextTheme(
           bodyText1: baseTextTheme.bodyText1!.copyWith(
             color: secondaryText,

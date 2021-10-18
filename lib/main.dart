@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:flutter_getx_boilerplate/shared/shared.dart';
 import 'package:flutter_getx_boilerplate/api/app_config.dart';
 

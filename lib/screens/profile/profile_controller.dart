@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:flutter_getx_boilerplate/api/api.dart';
 import 'package:flutter_getx_boilerplate/controller/firebase_auth_controller.dart';
 import 'package:flutter_getx_boilerplate/firebase_api/fb_api_error.dart';

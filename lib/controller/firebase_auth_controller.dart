@@ -43,7 +43,7 @@ class FirebaseAuthController extends GetxController with FirebaseApiError {
       }
     } else {
 
-      Get.offAllNamed(AppRoutes.PROFILE);
+      Get.offAllNamed(AppRoutes.HOME);
     }
   }
 
@@ -56,7 +56,7 @@ class FirebaseAuthController extends GetxController with FirebaseApiError {
       // add new profile if new user
       if (userResponse == null) {
         logger.d('init UserResponse find null');
-        userResponse = UserResponse.fromUserFirebase(firebaseUser);
+        userResponse = UserResponse.fromUserFirebase(firebaseUser,);
 
         await _addUserToFirestore(firebaseUser.uid, userResponse);
       }

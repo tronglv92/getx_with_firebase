@@ -1,5 +1,6 @@
 import 'dart:async';
 
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_getx_boilerplate/models/models.dart';
 import 'package:flutter_getx_boilerplate/shared/shared.dart';

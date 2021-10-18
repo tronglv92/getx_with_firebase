@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_getx_boilerplate/modules/me/cards/cards_screen.dart';
 import 'package:flutter_getx_boilerplate/screens/count/count_binding.dart';
 import 'package:flutter_getx_boilerplate/screens/count/count_screen.dart';
+import 'package:flutter_getx_boilerplate/screens/notifications/notification.dart';
+import 'package:flutter_getx_boilerplate/screens/product/product_binding.dart';
+import 'package:flutter_getx_boilerplate/screens/product/product_screen.dart';
 import 'package:flutter_getx_boilerplate/screens/profile/profile.dart';
 
 import 'package:flutter_getx_boilerplate/screens/splash/splash_binding.dart';
@@ -42,14 +46,16 @@ class AppPages {
         children: [
 
         ]),
+
     GetPage(
-      name: AppRoutes.COUNT,
-      page: () => Count(),
-      binding: CountBinding(),
+      name: AppRoutes.NOTIFICATION,
+      page: () => NotificationScreen(),
+      binding: NotificationBinding(),
     ),
     GetPage(
-      name: AppRoutes.OTHER,
-      page: () => Other(),
+      name: AppRoutes.PRODUCT,
+      page: () =>  ProductScreen(),
+      binding: ProductBinding(),
     ),
   ];
 }

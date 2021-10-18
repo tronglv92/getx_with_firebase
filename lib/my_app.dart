@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:flutter_getx_boilerplate/routes/app_pages.dart';
 import 'package:flutter_getx_boilerplate/shared/utils/app_log.dart';
 import 'package:flutter_getx_boilerplate/theme/theme_data.dart';

@@ -38,6 +38,7 @@ class _WPickerDateState extends BaseStateful<WPickerDate> {
     super.build(context);
     return WBottomActionSheet(
       body: Container(
+        color: Colors.white,
         child: Column(
           children: <Widget>[
             Container(
@@ -53,7 +54,7 @@ class _WPickerDateState extends BaseStateful<WPickerDate> {
               height: 200,
               child: CupertinoDatePicker(
                 initialDateTime: widget.initDateTime ?? selected,
-                mode: CupertinoDatePickerMode.time,
+                mode: CupertinoDatePickerMode.dateAndTime,
                 onDateTimeChanged: (DateTime value) {
                   HapticFeedback.selectionClick();
                   setState(() {

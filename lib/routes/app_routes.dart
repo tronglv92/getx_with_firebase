@@ -10,4 +10,6 @@ abstract class AppRoutes {
   static const CARDS = '/cards';
   static const COUNT = '/count';
   static const OTHER = '/other';
+  static const NOTIFICATION = '/notificaiton';
+  static const PRODUCT = '/product';
 }

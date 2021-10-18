@@ -39,6 +39,7 @@ class _WPickerTimeState extends BaseStateful<WPickerTime> {
     final bool isTimeValid = selected > Duration.zero;
     return WBottomActionSheet(
       body: Container(
+        color: Colors.white,
         child: Column(
           children: <Widget>[
             Container(
