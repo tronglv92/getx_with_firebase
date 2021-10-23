@@ -33,11 +33,14 @@ class UserDatabase {
 
   //Method to create/update user
   Future<void> setUser(
-          {required UserResponse user, required String uid}) async =>
-      await _fireStoreService.set(
-        path: FireStorePath.user(uid),
-        data: user.toJson(),
-      );
+          {required UserResponse user, required String uid}) async{
+    await _fireStoreService.set(
+      path: FireStorePath.user(uid),
+      data: user.toJson(),
+    );
+    return;
+  }
+
 
   Future<void> updatePhoto({required String photo, required String uid}) async {
     return _firebaseFirestore

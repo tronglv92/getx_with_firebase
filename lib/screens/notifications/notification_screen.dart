@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_boilerplate/models/response/user_response.dart';
+import 'package:flutter_getx_boilerplate/screens/notifications/views/create_notify_dialog.dart';
 import 'package:flutter_getx_boilerplate/shared/utils/app_extension.dart';
 import 'package:flutter_getx_boilerplate/shared/utils/app_extension.dart';
 import 'package:flutter_getx_boilerplate/shared/utils/app_style.dart';
@@ -21,109 +21,32 @@ import 'notification_controller.dart';
 class NotificationScreen extends GetView<NotificationController> {
   const NotificationScreen({Key? key}) : super(key: key);
 
-  Future<void> onPressCreate(BuildContext context) async {
+  Future<void> onPressDate(BuildContext context) async {
+    AppFocus.unfocus(context);
+    DateTime? dateSelect= await WPickerDate.showPicker(context);
+    controller.dateSelected=dateSelect;
+
+  }
+
+  Future<void> onPressCreate(
+      {required BuildContext context, required UserResponse user}) async {
     showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-
         builder: (BuildContext context) {
-          return InkWell(
-            onTap:(){
-              AppFocus.unfocus(context);
-            },
-            child: Container(
-              padding: EdgeInsets.only(
-                  left: 15.W,
-                  right: 15.W,
-                  top: 15.W,
-                  bottom: MediaQuery.of(context).viewInsets.bottom + 15.H),
-              color: Colors.white,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(
-                    height: 20.H,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 100.W,
-                          child: Text(
-                            'Email ',
-                            style: txt14RegularRoboto(),
-                          )),
-                      Text(
-                        'test@gmail.com',
-                        style: txt14RegularRoboto(),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.H,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 100.W,
-                          child: Text(
-                            'Title ',
-                            style: txt14RegularRoboto(),
-                          )),
-                      const Expanded(
-                        child: ATextFieldForm(
-                          hintText: 'Title',
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.H,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 100.W,
-                          child: Text(
-                            'Message ',
-                            style: txt14RegularRoboto(),
-                          )),
-                      const Expanded(
-                        child: ATextFieldForm(
-                          hintText: 'Title',
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.H,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                          width: 100.W,
-                          child: Text(
-                            'Time ',
-                            style: txt14RegularRoboto(),
-                          )),
-                      Text(
-                        '12/2/2021',
-                        style: txt14RegularRoboto(),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.H,
-                  ),
-                  ElevatedButton(
-                    child: const Text('Create notification'),
-                    onPressed: () {
-                      AppFocus.unfocus(context);
-                      WPickerDate.showPicker(context);
-                    },
-                  )
-                ],
-              ),
-            ),
+          return CreateNotifyDialog(
+              user: user,
+              titleController: controller.titleController,
+              messageController: controller.messageController,
+              date: controller.dateSelected,
+              onPressCreate: () {
+                controller.sendNotifications(user);
+                Get.back();
+              },
+              onPressDate: () {
+                onPressDate(context);
+              },
+
           );
         });
   }
@@ -149,60 +72,65 @@ class NotificationScreen extends GetView<NotificationController> {
           child: Column(
             children: [
               Expanded(
-                  child: ListView.separated(
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    color: Colors.white,
-                    elevation: 3,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 15.W, vertical: 15.H),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Name',
-                                    style: txt14RegularRoboto(),
-                                  ),
-                                  SizedBox(
-                                    height: 10.H,
-                                  ),
-                                  Text(
-                                    'Email',
-                                    style: txt12RegularRoboto(),
-                                  ),
-                                ],
+                  child: Obx(() => ListView.separated(
+                        itemBuilder: (BuildContext context, int index) {
+                          UserResponse user = controller.users[index];
+                          return Card(
+                            color: Colors.white,
+                            elevation: 3,
+                            child: InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.W, vertical: 15.H),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            user.displayName ?? '',
+                                            style: txt14RegularRoboto(),
+                                          ),
+                                          SizedBox(
+                                            height: 10.H,
+                                          ),
+                                          Text(
+                                            user.email ?? '',
+                                            style: txt12RegularRoboto(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    AButtonRoundedLong(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.W),
+                                        child: Text(
+                                          'Notify',
+                                          style: txt10RegularRoboto(
+                                              color: Colors.white),
+                                        ),
+                                        primary: Colors.blue,
+                                        borderRadius: 14,
+                                        onPress: () {
+                                          onPressCreate(
+                                              context: context, user: user);
+                                        }),
+                                  ],
+                                ),
                               ),
                             ),
-                            AButtonRoundedLong(
-                                padding: EdgeInsets.symmetric(horizontal: 5.W),
-                                child: Text(
-                                  'Notify',
-                                  style:
-                                      txt10RegularRoboto(color: Colors.white),
-                                ),
-                                primary: Colors.blue,
-                                borderRadius: 14,
-                                onPress: () {
-                                  onPressCreate(context);
-                                }),
-                          ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(
+                          height: 5.H,
                         ),
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
-                  height: 5.H,
-                ),
-                padding: EdgeInsets.symmetric(vertical: 20.H),
-                itemCount: 30,
-              )),
+                        padding: EdgeInsets.symmetric(vertical: 20.H),
+                        itemCount: controller.users.length,
+                      ))),
             ],
           ),
         ),

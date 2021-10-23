@@ -45,11 +45,33 @@ class HomeScreen extends StatelessWidget {
                 ),
                 AButtonRoundedLong(
                     child: Text(
+                      'Schedule Notifications',
+                      style: txt14RegularRoboto(color: Colors.white),
+                    ),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.SCHEDULE_NOTIFICATION);
+                    }),
+                SizedBox(
+                  height: 15.H,
+                ),
+                AButtonRoundedLong(
+                    child: Text(
                       'Notifications',
                       style: txt14RegularRoboto(color: Colors.white),
                     ),
                     onPress: () {
                       Get.toNamed(AppRoutes.NOTIFICATION);
+                    }),
+                SizedBox(
+                  height: 15.H,
+                ),
+                AButtonRoundedLong(
+                    child: Text(
+                      'Add Notifications',
+                      style: txt14RegularRoboto(color: Colors.white),
+                    ),
+                    onPress: () {
+                      controller.addFcmTokens();
                     }),
                 SizedBox(
                   height: 15.H,

@@ -83,6 +83,11 @@ extension DateTimeExtension on DateTime {
   String toHmaa() {
     return DateFormat('hh:mm aaaa').format(this);
   }
+
+  String toDDMMyyyyHHmm() {
+    return DateFormat('dd/MM/yyyy hh:mm aaaa').format(this);
+  }
+
 }
 
 /// Extension for DateTime from String

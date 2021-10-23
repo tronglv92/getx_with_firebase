@@ -6,6 +6,6 @@ class HomeBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(
-        () => HomeController(authController: Get.find(),userDb: Get.find()));
+        () => HomeController(authController: Get.find(),userDb: Get.find(),notifyDb: Get.find()));
   }
 }

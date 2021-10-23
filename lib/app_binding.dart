@@ -6,6 +6,7 @@ import 'package:flutter_getx_boilerplate/firebase_api/user_db.dart';
 import 'package:get/get.dart';
 
 import 'controller/firebase_auth_controller.dart';
+import 'firebase_api/notification_db.dart';
 
 class AppBinding extends Bindings {
   @override
@@ -14,6 +15,7 @@ class AppBinding extends Bindings {
     Get.put(FirebaseAuthDatabase(),permanent: true);
     Get.put(UserDatabase(),permanent: true);
     Get.put(ProductDatabase(),permanent: true);
-    Get.put(FirebaseAuthController(authDb: Get.find(),userDb: Get.find()),permanent: true);
+    Get.put(NotificationDatabase(),permanent: true);
+    Get.put(FirebaseAuthController(authDb: Get.find(),userDb: Get.find(),notificationDatabase: Get.find()),permanent: true);
   }
 }

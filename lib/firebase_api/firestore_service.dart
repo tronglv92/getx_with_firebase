@@ -53,12 +53,16 @@ class FireStoreService {
     int Function(T lhs, T rhs)? sort,
   }) {
     // ignore: always_specify_types
+
+    logger.d("path ",path);
+
     Query query = FirebaseFirestore.instance.collection(path);
     if (queryBuilder != null) {
       query = queryBuilder(query);
     }
     // ignore: always_specify_types
     final Stream<QuerySnapshot> snapshots = query.snapshots();
+    logger.d("snapshots.length ",snapshots.length);
     return snapshots.map((QuerySnapshot<Object?> snapshot) {
       final List<T> result = snapshot.docs
           .map((QueryDocumentSnapshot<Object?> snapshot) =>
@@ -127,5 +131,16 @@ class FireStoreService {
     return snapshots.map((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       return builder(snapshot.data(), snapshot.id);
     });
+  }
+  Future<T> documentFuture<T>({
+    required String path,
+    required T Function(Map<String, dynamic>? data, String documentID) builder,
+  })  async{
+    final DocumentReference<Map<String, dynamic>> reference =
+    FirebaseFirestore.instance.doc(path);
+
+    final DocumentSnapshot<Map<String, dynamic>> snapshot = await
+    reference.get();
+    return builder(snapshot.data(), snapshot.id);
   }
 }

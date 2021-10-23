@@ -6,7 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
+import 'package:flutter_getx_boilerplate/shared/utils/app_loading.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_getx_boilerplate/routes/app_pages.dart';
 import 'package:flutter_getx_boilerplate/shared/utils/app_log.dart';
 import 'package:flutter_getx_boilerplate/theme/theme_data.dart';
@@ -18,41 +19,47 @@ import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 import 'app_binding.dart';
 import 'lang/translation_service.dart';
+import 'main.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
-  print('Handling a background message ${message.messageId}');
-}
 
+  await Firebase.initializeApp();
+  if (USE_EMULATOR) {
+    await connectToFirebaseEmulator();
+  }
+
+  showNotification(title: message.data['title'],message: message.data['body']);
+  logger.d('Handling a background message ${message.toString()}');
+}
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 Future<void> myMain() async {
   // Start services later
   WidgetsFlutterBinding.ensureInitialized();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   if (!kIsWeb) {
-    // Create an Android Notification Channel.
-    NotificationSettings settings =
-        await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
-    } else {
-      print('User declined or has not accepted permission');
-    }
+    // // // Create an Android Notification Channel.
+    // NotificationSettings settings =
+    //     await FirebaseMessaging.instance.requestPermission(
+    //   alert: true,
+    //   announcement: false,
+    //   badge: true,
+    //   carPlay: false,
+    //   criticalAlert: false,
+    //   provisional: false,
+    //   sound: true,
+    // );
+    //
+    // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    //   logger.d('User granted permission');
+    // } else if (settings.authorizationStatus ==
+    //     AuthorizationStatus.provisional) {
+    //   logger.d('User granted provisional permission');
+    // } else {
+    //   logger.d('User declined or has not accepted permission');
+    // }
 
     // Update the iOS foreground notification presentation options to allow
     // heads up notifications.
@@ -67,6 +74,27 @@ Future<void> myMain() async {
   // Force portrait mode
   await SystemChrome.setPreferredOrientations(
       <DeviceOrientation>[DeviceOrientation.portraitUp]);
+
+  //set up flutter local notification
+
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('app_icon');
+
+  final IOSInitializationSettings initializationSettingsIOS =
+      IOSInitializationSettings(
+          requestSoundPermission: true,
+          requestBadgePermission: true,
+          requestAlertPermission: true,
+          onDidReceiveLocalNotification:
+              (int a, String? b, String? c, String? d) {});
+  final MacOSInitializationSettings initializationSettingsMacOS =
+      MacOSInitializationSettings();
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: initializationSettingsMacOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String? a) {});
 
   // Run Application
   runApp(const MyApp());
@@ -98,26 +126,27 @@ class _MyAppState extends State<MyApp> {
     fcmToken = await FirebaseMessaging.instance.getToken();
     //update value fcm token
 
-
-    print('FCM Token : $fcmToken');
+    logger.d('FCM Token : $fcmToken');
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
-      logger.d('message ', message);
+      logger.d('Firebase getInitialMessage message ', message);
+      // showNotification();
     });
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      logger.d('onMessage !', message);
+      logger.d('Firebase onMessage !', message);
+      showNotification(title: message.data['title'],message: message.data['body']);
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
+      logger.d('Firebase onMessageOpenedApp ',message);
     });
     if (defaultTargetPlatform == TargetPlatform.iOS ||
         defaultTargetPlatform == TargetPlatform.macOS) {
-      print('FlutterFire Messaging Example: Getting APNs token...');
+      logger.d('FlutterFire Messaging Example: Getting APNs token...');
       String? aPNSToken = await FirebaseMessaging.instance.getAPNSToken();
-      print('FlutterFire Messaging Example: Got APNs token: $aPNSToken');
+      logger.d('FlutterFire Messaging Example: Got APNs token: $aPNSToken');
     } else {
-      print(
+      logger.d(
           'FlutterFire Messaging Example: Getting an APNs token is only supported on iOS and macOS platforms.');
     }
   }

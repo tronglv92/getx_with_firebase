@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_getx_boilerplate/modules/me/cards/cards_screen.dart';
-import 'package:flutter_getx_boilerplate/screens/count/count_binding.dart';
-import 'package:flutter_getx_boilerplate/screens/count/count_screen.dart';
+
 import 'package:flutter_getx_boilerplate/screens/notifications/notification.dart';
 import 'package:flutter_getx_boilerplate/screens/product/product_binding.dart';
 import 'package:flutter_getx_boilerplate/screens/product/product_screen.dart';
 import 'package:flutter_getx_boilerplate/screens/profile/profile.dart';
+import 'package:flutter_getx_boilerplate/screens/scheno/schedule_binding.dart';
+import 'package:flutter_getx_boilerplate/screens/scheno/schedule_screen.dart';
+
 
 import 'package:flutter_getx_boilerplate/screens/splash/splash_binding.dart';
 import 'package:flutter_getx_boilerplate/screens/splash/splash_screen.dart';
@@ -33,20 +33,15 @@ class AppPages {
       binding: LoginBinding(),
     ),
     GetPage(
-        name: AppRoutes.HOME,
-        page: () => HomeScreen(),
-        binding: HomeBinding(),
-        children: [
-          GetPage(name: AppRoutes.CARDS, page: () => CardsScreen()),
-        ]),
-    GetPage(
         name: AppRoutes.PROFILE,
         page: () => ProfileScreen(),
         binding: ProfileBinding(),
-        children: [
-
-        ]),
-
+        children: []),
+    GetPage(
+      name: AppRoutes.HOME,
+      page: () => HomeScreen(),
+      binding: HomeBinding(),
+    ),
     GetPage(
       name: AppRoutes.NOTIFICATION,
       page: () => NotificationScreen(),
@@ -54,8 +49,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.PRODUCT,
-      page: () =>  ProductScreen(),
+      page: () => ProductScreen(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SCHEDULE_NOTIFICATION,
+      page: () =>  ScheduleScreen(),
+      binding: ScheduleBinding(),
     ),
   ];
 }

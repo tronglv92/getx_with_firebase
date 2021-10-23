@@ -11,7 +11,11 @@ class FireStorePath {
 
   static String user(String uid) => 'users/$uid';
   static String fcmToken(String uid) => 'fcmTokens/$uid';
-
+  static String fcmTokenCollections(String uid,String fcmToken) => 'fcmTokens/$uid/tokens/$fcmToken';
   static String users() => 'users';
   static String products() => 'products';
+
+  static String notifications() => 'notifications';
+
+
 }

@@ -11,5 +11,6 @@ abstract class AppRoutes {
   static const COUNT = '/count';
   static const OTHER = '/other';
   static const NOTIFICATION = '/notificaiton';
+  static const SCHEDULE_NOTIFICATION = '/schedulenotification';
   static const PRODUCT = '/product';
 }

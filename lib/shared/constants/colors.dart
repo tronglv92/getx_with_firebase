@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColorConstants {
   static Color lightScaffoldBackgroundColor = hexToColor('#F9F9F9');
   static Color darkScaffoldBackgroundColor = hexToColor('#2F2E2E');
-  static Color secondaryAppColor = hexToColor('#22DDA6');
+  static Color secondaryAppColor =Colors.blue;
   static Color secondaryDarkAppColor = Colors.white;
   static Color tipColor = hexToColor('#B6B6B6');
   static Color lightGray = Color(0xFFF6F6F6);

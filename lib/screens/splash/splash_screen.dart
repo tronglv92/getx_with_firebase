@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_getx_boilerplate/modules/splash/splash.dart';
+
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+
+import 'splash_controller.dart';
 
 class SplashScreen extends GetView<SplashController> {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class SplashScreen extends GetView<SplashController> {
    return Container(
      color: Colors.white,
      child:const Center(
-       child: Text("Splash"),
+       child: Text("Splash "),
      ),
    );
   }

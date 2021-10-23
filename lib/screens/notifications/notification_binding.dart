@@ -5,6 +5,6 @@ class NotificationBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<NotificationController>(
-            () => NotificationController());
+            () => NotificationController(userDb: Get.find(),notificationDb: Get.find()));
   }
 }
