@@ -184,7 +184,7 @@ class _MyAppState extends State<MyApp> {
       builder: () => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         enableLog: true,
-        initialRoute: AppRoutes.SPLASH,
+        initialRoute: AppRoutes.HOME,
         defaultTransition: Transition.fade,
         getPages: AppPages.routes,
         initialBinding: AppBinding(),

@@ -1,0 +1,7 @@
+{
+  "elasticsearch": {
+    "username": "elastic",
+    "password": "m3i1NkwoO5GFnrpli7OsgdFA",
+    "url": "https://make-request-demo.es.eastus2.azure.elastic-cloud.com:9243"
+  }
+}

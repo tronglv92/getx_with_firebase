@@ -5,10 +5,10 @@ class ProductResponse extends Equatable {
   const ProductResponse({required this.name, required this.price});
 
   final String name;
-  final double price;
+  final int price;
   ProductResponse.fromJson(Map<String, dynamic> data)
       : name = data['name'] as String,
-        price =data['price'] != null ? data['price'] as double : 0;
+        price =data['price'] != null ? data['price'] as int : 0;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

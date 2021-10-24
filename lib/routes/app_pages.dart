@@ -5,6 +5,8 @@ import 'package:flutter_getx_boilerplate/screens/product/product_screen.dart';
 import 'package:flutter_getx_boilerplate/screens/profile/profile.dart';
 import 'package:flutter_getx_boilerplate/screens/scheno/schedule_binding.dart';
 import 'package:flutter_getx_boilerplate/screens/scheno/schedule_screen.dart';
+import 'package:flutter_getx_boilerplate/screens/search/search_binding.dart';
+import 'package:flutter_getx_boilerplate/screens/search/search_screen.dart';
 
 
 import 'package:flutter_getx_boilerplate/screens/splash/splash_binding.dart';
@@ -56,6 +58,11 @@ class AppPages {
       name: AppRoutes.SCHEDULE_NOTIFICATION,
       page: () =>  ScheduleScreen(),
       binding: ScheduleBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SEARCH,
+      page: () =>  SearchScreen(),
+      binding: SearchBinding(),
     ),
   ];
 }

@@ -89,6 +89,17 @@ class HomeScreen extends StatelessWidget {
                 ),
                 AButtonRoundedLong(
                     child: Text(
+                      'Elastic Search',
+                      style: txt14RegularRoboto(color: Colors.white),
+                    ),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.SEARCH);
+                    }),
+                SizedBox(
+                  height: 15.H,
+                ),
+                AButtonRoundedLong(
+                    child: Text(
                       'Logout',
                       style: txt14RegularRoboto(color: Colors.white),
                     ),
