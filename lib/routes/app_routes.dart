@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const SCHEDULE_NOTIFICATION = '/schedulenotification';
   static const PRODUCT = '/product';
   static const SEARCH = '/search';
+  static const PAYMENT_STRIPE = '/payment_stripe';
 }

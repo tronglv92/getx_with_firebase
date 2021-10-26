@@ -1,5 +1,6 @@
 
 import 'package:flutter_getx_boilerplate/screens/notifications/notification.dart';
+import 'package:flutter_getx_boilerplate/screens/payment_stripe/payment_stripe.dart';
 import 'package:flutter_getx_boilerplate/screens/product/product_binding.dart';
 import 'package:flutter_getx_boilerplate/screens/product/product_screen.dart';
 import 'package:flutter_getx_boilerplate/screens/profile/profile.dart';
@@ -63,6 +64,11 @@ class AppPages {
       name: AppRoutes.SEARCH,
       page: () =>  SearchScreen(),
       binding: SearchBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.PAYMENT_STRIPE,
+      page: () =>  PaymentStripeScreen(),
+      binding: PaymentStripeBinding(),
     ),
   ];
 }

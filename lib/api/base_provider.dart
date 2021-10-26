@@ -1,4 +1,5 @@
-import 'package:flutter_getx_boilerplate/api/app_config.dart';
+
+import 'package:flutter_getx_boilerplate/shared/env/app_config.dart';
 import 'package:get/get.dart';
 
 import 'api.dart';

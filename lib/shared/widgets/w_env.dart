@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_boilerplate/shared/env/app_config.dart';
 import 'package:flutter_getx_boilerplate/shared/safety/base_stateless.dart';
-import 'package:flutter_getx_boilerplate/api/app_config.dart';
+
 import 'package:flutter_getx_boilerplate/shared/widgets/w_text_rounded.dart';
 
 

@@ -100,6 +100,17 @@ class HomeScreen extends StatelessWidget {
                 ),
                 AButtonRoundedLong(
                     child: Text(
+                      'Payment Stripe',
+                      style: txt14RegularRoboto(color: Colors.white),
+                    ),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.PAYMENT_STRIPE);
+                    }),
+                SizedBox(
+                  height: 15.H,
+                ),
+                AButtonRoundedLong(
+                    child: Text(
                       'Logout',
                       style: txt14RegularRoboto(color: Colors.white),
                     ),

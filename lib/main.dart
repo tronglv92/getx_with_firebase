@@ -10,13 +10,16 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_getx_boilerplate/firebase_api/firestore_service.dart';
+import 'package:flutter_getx_boilerplate/shared/env/app_config.dart';
 
 import 'package:flutter_getx_boilerplate/shared/shared.dart';
-import 'package:flutter_getx_boilerplate/api/app_config.dart';
+
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'di.dart';
 import 'dart:io';
 import 'my_app.dart';
+import 'screens/payment_stripe/payment_services.dart';
 
 const bool USE_EMULATOR = true;
 
@@ -24,7 +27,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  if (USE_EMULATOR==true) {
+  await PaymentServices.init();
+  // await Stripe.instance.initPaymentSheet(
+  //     paymentSheetParameters: SetupPaymentSheetParameters(
+  //
+  //       style: ThemeMode.dark,
+  //
+  //     ));
+
+  if (USE_EMULATOR == true) {
     await connectToFirebaseEmulator();
   }
 
@@ -54,7 +65,7 @@ void main() async {
 
 Future<void> connectToFirebaseEmulator() async {
   // final localHostString = Platform.isAndroid ? '10.0.2.2' : 'localhost';
-  final localHostString =  '192.168.201.102';
+  final localHostString = '192.168.201.102';
   FirebaseFirestore.instance.settings = Settings(
     host: '$localHostString:8080',
     sslEnabled: false,
@@ -62,7 +73,6 @@ Future<void> connectToFirebaseEmulator() async {
   );
   await FirebaseAuth.instance.useAuthEmulator(localHostString, 9099);
   FirebaseFunctions.instance.useFunctionsEmulator(localHostString, 5001);
-
 }
 
 void configLoading() {
